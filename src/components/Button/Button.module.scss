@@ -7,6 +7,7 @@
     border-radius: 4px;
     font-size: 1.6rem;
     font-weight: 700;
+    font-family: 'ProximaNova', sans-serif;
     cursor: pointer;
     background-color: var(--white);
     border: 1px solid transparent;
@@ -22,7 +23,8 @@
     }
 }
 
-.icon + .title, .title + .icon {
+.icon + .title,
+.title + .icon {
     margin-left: 8px;
 }
 
@@ -67,6 +69,16 @@
     &:hover {
         border-color: currentColor;
         background-color: rgba(254, 44, 85, 0.06);
+    }
+}
+
+.black {
+    color: #333;
+    border-color: #e3e3e4;
+
+    &:hover {
+        border-color: #dcdcdc;
+        background-color: rgba(22, 24, 35, 0.03);
     }
 }
 
