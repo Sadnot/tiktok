@@ -3,6 +3,7 @@ import HeadlessTippy from '@tippyjs/react/headless';
 import AccountItem from '../AccountItem';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import { SearchIcon } from '~/components/Icons';
+import { useDebouce } from '~/hooks';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleXmark, faSpinner } from '@fortawesome/free-solid-svg-icons';
 import styles from './Search.module.scss';
@@ -16,10 +17,16 @@ function Search() {
     const [showResult, setShowResult] = useState(true);
     const [loading, setLoading] = useState(false);
 
+    // 1. ''
+    // 2. 'h'
+    // 3. 'ho'
+    // 4. 'hoa'
+    const debouced = useDebouce(searchValue, 500);
+
     const inputRef = useRef();
 
     useEffect(() => {
-        if (!searchValue.trim()) {
+        if (!debouced.trim()) {
             setSearchResult([]);
             return;
         }
@@ -28,7 +35,7 @@ function Search() {
 
         fetch(
             `https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(
-                searchValue,
+                debouced,
             )}&type=less`,
         )
             .then((res) => res.json())
@@ -39,7 +46,7 @@ function Search() {
             .catch(() => {
                 setLoading(false);
             });
-    }, [searchValue]);
+    }, [debouced]);
 
     const handleHideResult = () => {
         setShowResult(true);
