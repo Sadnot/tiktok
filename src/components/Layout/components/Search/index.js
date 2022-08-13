@@ -35,22 +35,21 @@ function Search() {
 
         setLoading(true);
 
-        // XML_HttpRequest
-        // Fetch
-        request
-            .get('users/search', {
-                params: {
-                    q: debouced,
-                    type: 'less',
-                },
-            })
-            .then((res) => {
+        const fetchApi = async () => {
+            try {
+                const res = await request.get('users/search', {
+                    params: {
+                        q: debouced,
+                        type: 'less',
+                    },
+                });
                 setSearchResult(res.data);
+            } catch {
                 setLoading(false);
-            })
-            .catch(() => {
-                setLoading(false);
-            });
+            }
+        };
+
+        fetchApi();
     }, [debouced]);
 
     const handleHideResult = () => {
