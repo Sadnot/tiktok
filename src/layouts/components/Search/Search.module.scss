@@ -21,6 +21,8 @@
     border: 1.5px solid transparent;
 
     input {
+        font-family: var(--font-family);
+        font-weight: 400;
         flex: 1;
         height: 100%;
         font-size: 1.6rem;
